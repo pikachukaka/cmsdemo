@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        p{text-align: center}
+        #a{margin-left: 570px;color: dodgerblue}
+        #a2{margin-left: 10px;color: dodgerblue}
+    </style>
+</head>
+
+<body>
+<p>您的会议号是<span th:text="${newID}"></span></p>
+<a id="a" th:href="@{/operate1.html}">点此返回</a>
+<a id="a2" th:href="@{'/generate/'+${newID}}">点此生成二维码</a>
+</body>
+</html>

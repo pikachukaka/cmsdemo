@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1.0">
+    <link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+    <title></title>
+    <style>
+        #detailTable{
+            margin-top: 20px;
+        }
+        button{
+            margin-left: 520px;
+        }
+        p{
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<div id="detailDiv">
+    <table class="table table-bordered " id="detailTable">
+        <caption th:hidden="true" th:text="${id}" th:if="${not #strings.isEmpty(id)}" ></caption>
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>身份证号</th>
+            <th>工作单位</th>
+            <th>电话号码</th>
+            <th>参会时间</th>
+            <th>是否需要安排房间</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!--/*@thymesVar id="records" type="com.learning.cmsdemo.model.ConferenceRecord"*/-->
+        <tr th:each="i:${attendees}">
+            <td th:text="${i.getName()}"></td>
+            <td th:text="${i.getId()}"></td>
+            <td th:text="${i.getWorkplace()}"></td>
+            <td th:text="${i.getTelephone()}"></td>
+            <td th:text="${i.getTime()}"></td>
+            <td th:text="${i.getHouse()}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+    <p  th:text="${detailMSG}" th:if="${not #strings.isEmpty(detailMSG)}"></p>
+    <button class="btn btn-success col-sm-1" onclick="download()">下载此表</button>
+
+</div>
+</div>
+<script th:src="@{/static/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/static/js/bootstrap.min.js}"></script>
+<script>
+    function  download() {
+        var $id=document.getElementById("detailTable").caption.innerHTML;
+        var url='/download/'+$id;
+        $(location).attr('href',url);
+    }
+</script>
+</body>
+
+</html>
